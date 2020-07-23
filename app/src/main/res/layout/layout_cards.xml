@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:tag="Main Dashboard">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/cv_iv_dashboard_vi"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/sample_vendor_img1"
+                android:contentDescription="@string/sample_vendor_name1"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cv_tv_dashboard_vn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_vendor_name1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:padding="10dp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingHorizontal="15dp"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/cv_tv_dashboard_vr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sample_vendor_vr1"
+                        android:background="@drawable/rounded_corner_vr"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:paddingHorizontal="7dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cv_tv_dashboard_vt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_vendor_title1"
+                android:paddingHorizontal="10dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cv_tv_dashboard_wd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_vendor_wd1"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingEnd="5dp"/>
+
+                <TextView
+                    android:id="@+id/cv_tv_dashboard_dash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hyphen"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/cv_tv_dashboard_pr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_vendor_pr1"
+                    android:paddingBottom="10dp"
+                    android:paddingHorizontal="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

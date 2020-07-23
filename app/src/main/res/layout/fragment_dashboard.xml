@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Toolbar
+        android:id="@+id/tb_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <Spinner
+            android:id="@+id/sp_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </Toolbar>
+
+    <TextView
+        android:id="@+id/tv_nearby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nfs"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>

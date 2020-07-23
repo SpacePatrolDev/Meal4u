@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "967207292246",
+    "firebase_url": "https://meal4u-69675.firebaseio.com",
+    "project_id": "meal4u-69675",
+    "storage_bucket": "meal4u-69675.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967207292246:android:979e61d55c0ec84b83daf7",
+        "android_client_info": {
+          "package_name": "com.example.meal4u"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967207292246-9u3vatiqqet989er6kuhke9a4rbd7u80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meal4u",
+            "certificate_hash": "9483cb937a4d523443c316982423bf3c34eb9589"
+          }
+        },
+        {
+          "client_id": "967207292246-h748ald4jat5r5e27c19n0me4bmsgklc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbOQN47qTIU-9qumiZ_fZxZq2ADzV0HWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967207292246-h748ald4jat5r5e27c19n0me4bmsgklc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

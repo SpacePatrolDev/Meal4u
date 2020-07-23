@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Meal4u</string>
+    <string name="tv_nfs">Nearby Food Services</string>
+    <string name="sample_vendor_name1">Royal Food Services</string>
+    <string name="sample_vendor_title1">Authentic Indian Food</string>
+    <string name="sample_vendor_wd1">Mon to Fri</string>
+    <string name="hyphen">-</string>
+    <string name="sample_vendor_pr1">$35 to $65</string>
+    <string name="sample_vendor_vr1">4.8</string>
+    <string name="nv_dashboard">Dashboard</string>
+    <string name="nb_orders">Orders</string>
+    <string name="nb_profile">Profile</string>
+
+    <string-array name="locations">
+        <item>Waterloo, ON</item>
+        <item>Kitchener, ON</item>
+        <item>Cambridge, ON</item>
+        <item>Guelph, ON</item>
+    </string-array>
+</resources>
