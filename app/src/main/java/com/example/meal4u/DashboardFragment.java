@@ -17,12 +17,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DashboardFragment extends Fragment {
 
-    private static ArrayList<Vendor> vendors;
+    private static List<Vendor> vendors;
+    private static List<String> keys;
     private static RecyclerView recyclerView;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -35,8 +42,6 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        initialize();
-
         toolbar = (Toolbar) view.findViewById(R.id.tb_dashboard);
         spinner = (Spinner) view.findViewById(R.id.sp_location);
 
@@ -47,7 +52,7 @@ public class DashboardFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "Location : "+spinner.getSelectedItem().toString(),Toast.LENGTH_LONG).show();
+               Toast.makeText(getActivity(), "Location : "+spinner.getSelectedItem().toString(),Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -61,19 +66,34 @@ public class DashboardFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_dashboard);
         recyclerView.hasFixedSize();
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        final Context context = this.getActivity();
 
-        adapter = new RecycleViewAdapter(vendors, this.getActivity());
-        recyclerView.setAdapter(adapter);
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        new FirebaseDatabase().getVendors(new FirebaseDatabase.DataStatus() {
+            @Override
+            public void isLoaded(List<Vendor> vendors, List<String> vendorKeys) {
+                adapter = new RecycleViewAdapter(vendors, vendorKeys, context);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void isInserted() {
+
+            }
+
+            @Override
+            public void isUpdated() {
+
+            }
+
+            @Override
+            public void isDeleted() {
+
+            }
+        });
 
         return view;
-    }
-
-    private void initialize(){
-        vendors = new ArrayList<Vendor>();
-        vendors.add(new Vendor("Royal Foods","4.8","Authentic Indian Cuisine","Mon to Fri","$35 to $65", R.drawable.sample_vendor_img1));
-        vendors.add(new Vendor("Taste of Mediterranean","4.5","Delicious Mediterranean Foods","Mon to Thur","$30 to $50", R.drawable.sample_vendor_img2));
-        vendors.add(new Vendor("Waterloo Tiffin Service","4.1","Hot & Fresh Lunch, Everyday","Mon to Sat","$40 to $75", R.drawable.sample_vendor_img3));
     }
 }

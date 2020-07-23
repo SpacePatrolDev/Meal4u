@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.rViewHolder> {
 
@@ -25,9 +26,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         TextView tvVendorPR;
         ImageView ivVendorDP;
         Context context;
-        ArrayList<Vendor> vendorData;
+        List<Vendor> vendorData;
+        List<String> vendorKeys;
+        private String key;
 
-        public rViewHolder(View v, Context c, ArrayList<Vendor> al){
+        public rViewHolder(View v, Context c, List<Vendor> al, List<String> k){
             super(v);
             cv = (CardView) v.findViewById(R.id.rv_dashboard);
             tvVendorName = (TextView) v.findViewById(R.id.cv_tv_dashboard_vn);
@@ -38,8 +41,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             ivVendorDP = (ImageView) v.findViewById(R.id.cv_iv_dashboard_vi);
             this.context = c;
             this.vendorData = al;
+            this.vendorKeys = k;
 
             v.setOnClickListener(this);
+        }
+
+        public void bind(Vendor vendor, String key){
+            tvVendorName.setText(vendor.getVendorName());
+            tvVendorRating.setText(vendor.getVendorRating());
+            tvVendorTitle.setText(vendor.getVendorTitle());
+            tvVendorWD.setText(vendor.getVendorWD());
+            tvVendorPR.setText(vendor.getVendorPR());
+            ivVendorDP.setImageResource(context.getResources().getIdentifier("drawable/"+vendor.getVendorDP(), null, context.getPackageName()));
+
+            this.key = key;
         }
 
         @Override
@@ -53,11 +68,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
     }
 
-    private ArrayList<Vendor> vendorData;
+    private List<Vendor> vendorData;
+    private List<String> vendorKey;
     private Context context;
 
-    public RecycleViewAdapter(ArrayList<Vendor> vendors, Context context){
+    public RecycleViewAdapter(List<Vendor> vendors, List<String> keys, Context context){
         this.vendorData = vendors;
+        this.vendorKey = keys;
         this.context = context;
     }
 
@@ -66,24 +83,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public rViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_cards, parent,false);
-        return new rViewHolder(view, context, vendorData);
+        return new rViewHolder(view, context, vendorData, vendorKey);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final rViewHolder holder, final int position) {
-        TextView tvVendorName = holder.tvVendorName;
-        TextView tvVendorRating = holder.tvVendorRating;
-        TextView tvVendorTitle = holder.tvVendorTitle;
-        TextView tvVendorWD = holder.tvVendorWD;
-        TextView tvVendorPR = holder.tvVendorPR;
-        ImageView ivVendorDP = holder.ivVendorDP;
-
-        tvVendorName.setText(vendorData.get(position).VendorName);
-        tvVendorRating.setText(vendorData.get(position).VendorRating);
-        tvVendorTitle.setText(vendorData.get(position).VendorTitle);
-        tvVendorWD.setText(vendorData.get(position).VendorWD);
-        tvVendorPR.setText(vendorData.get(position).VendorPR);
-        ivVendorDP.setImageResource(vendorData.get(position).VendorDP);
+        holder.bind(vendorData.get(position), vendorKey.get(position));
     }
 
     @Override
