@@ -60,9 +60,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, VendorDetails.class);
-            intent.putExtra("Vendor_Img",vendorData.get(getAdapterPosition()).VendorDP);
-            intent.putExtra("Vendor_Name",vendorData.get(getAdapterPosition()).VendorName);
-            intent.putExtra("Vendor_Rating",vendorData.get(getAdapterPosition()).VendorRating);
+            intent.putExtra("Vendor_Name", tvVendorName.getText());
+            intent.putExtra("Vendor_Rating", tvVendorRating.getText());
 
             context.startActivity(intent);
         }
