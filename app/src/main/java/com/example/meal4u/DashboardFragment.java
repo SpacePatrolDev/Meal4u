@@ -30,11 +30,11 @@ import java.util.Objects;
 public class DashboardFragment extends Fragment {
 
     private List<Vendor> vendors = new ArrayList<>();
-    private static List<String> keys;
-    private static RecyclerView recyclerView;
-    private static RecyclerView.Adapter adapter;
-    private static Firebase dbRootRef;
-    private static Context context;
+    private List<String> vendorKeys;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private Firebase dbRootRef;
+    private Context context;
     private RecyclerView.LayoutManager layoutManager;
 
     Toolbar toolbar;
@@ -87,7 +87,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 vendors.clear();
-                List<String> vendorKeys = new ArrayList<>();
+                vendorKeys = new ArrayList<>();
 
                 for (DataSnapshot vKeyNode : dataSnapshot.getChildren())
                 {
@@ -95,7 +95,7 @@ public class DashboardFragment extends Fragment {
                     Vendor vendor = vKeyNode.getValue(Vendor.class);
                     vendors.add(vendor);
                 }
-                adapter = new RecycleViewAdapter(vendors, vendorKeys, context);
+                adapter = new VendorViewAdapter(vendors, vendorKeys, context);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             }

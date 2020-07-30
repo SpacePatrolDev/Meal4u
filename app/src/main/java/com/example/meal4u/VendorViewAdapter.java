@@ -12,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.rViewHolder> {
+public class VendorViewAdapter extends RecyclerView.Adapter<VendorViewAdapter.rViewHolder> {
 
     public static class rViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv;
@@ -28,7 +27,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         Context context;
         List<Vendor> vendorData;
         List<String> vendorKeys;
-        private String key;
+        String key;
 
         public rViewHolder(View v, Context c, List<Vendor> al, List<String> k){
             super(v);
@@ -60,9 +59,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, VendorDetails.class);
-            intent.putExtra("Vendor_Name", tvVendorName.getText());
-            intent.putExtra("Vendor_Rating", tvVendorRating.getText());
-
+            intent.putExtra("Vendor_Key", key);
             context.startActivity(intent);
         }
     }
@@ -71,7 +68,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private List<String> vendorKey;
     private Context context;
 
-    public RecycleViewAdapter(List<Vendor> vendors, List<String> keys, Context context){
+    public VendorViewAdapter(List<Vendor> vendors, List<String> keys, Context context){
         this.vendorData = vendors;
         this.vendorKey = keys;
         this.context = context;

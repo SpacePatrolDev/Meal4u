@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:tag="Main Dashboard">
+    android:tag="Vendor Packages">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dashboard"
+        android:id="@+id/cv_packages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardview_light_background"
@@ -22,24 +22,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/cv_iv_dashboard_vi"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/sample_vendor_img1"
-                android:contentDescription="@string/vendor_name"
-                android:scaleType="centerCrop"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/cv_tv_dashboard_vn"
+                    android:id="@+id/cv_tv_packageName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/vendor_name"
+                    android:text="@string/package_name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:padding="10dp"
                     android:textStyle="bold"/>
@@ -53,10 +45,10 @@
                     android:gravity="end">
 
                     <TextView
-                        android:id="@+id/cv_tv_dashboard_vr"
+                        android:id="@+id/cv_tv_packageCost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/vendor_rating"
+                        android:text="@string/package_cost"
                         android:background="@drawable/rounded_corner_vr"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:paddingHorizontal="7dp"
@@ -67,41 +59,18 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/cv_tv_dashboard_vt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/vendor_title"
-                android:paddingHorizontal="10dp"/>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layout_for_package_textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/cv_tv_dashboard_wd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vendor_workDays"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="5dp"/>
-
-                <TextView
-                    android:id="@+id/cv_tv_dashboard_dash"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hyphen"
-                    android:paddingBottom="10dp"/>
-
-                <TextView
-                    android:id="@+id/cv_tv_dashboard_pr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vendor_priceRange"
-                    android:paddingBottom="10dp"
-                    android:paddingHorizontal="5dp"/>
+                <ListView
+                    android:id="@+id/lv_package_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:dividerHeight="1dp"
+                    android:padding="15dp"/>
 
             </LinearLayout>
 

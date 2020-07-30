@@ -1,15 +1,21 @@
 <resources>
     <string name="app_name">Meal4u</string>
     <string name="tv_nfs">Nearby Food Services</string>
-    <string name="sample_vendor_name1">Royal Food Services</string>
-    <string name="sample_vendor_title1">Authentic Indian Food</string>
-    <string name="sample_vendor_wd1">Mon to Fri</string>
-    <string name="hyphen">-</string>
-    <string name="sample_vendor_pr1">$35 to $65</string>
-    <string name="sample_vendor_vr1">4.8</string>
+    <string name="vendor_name">Vendor Name</string>
+    <string name="vendor_title">Vendor Title</string>
+    <string name="vendor_workDays">Mon to Fri</string>
+    <string name="hyphen">  -  </string>
+    <string name="vendor_priceRange">$00 to $00</string>
+    <string name="vendor_rating">0.0</string>
     <string name="nv_dashboard">Dashboard</string>
     <string name="nb_orders">Orders</string>
     <string name="nb_profile">Profile</string>
+    <string name="package_name">Package Name</string>
+    <string name="package_cost">$00</string>
+    <string name="package_weekday">Weekday</string>
+    <string name="package_menu">0 xxxxx + 0 xxxxx + 0 xxxxx + xxxxx</string>
+    <string name="hello">Hello,</string>
+    <string name="logout">Logout</string>
 
     <string-array name="locations">
         <item>Waterloo, ON</item>
