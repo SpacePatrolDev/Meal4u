@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 public class VendorDetails extends AppCompatActivity {
@@ -94,8 +95,8 @@ public class VendorDetails extends AppCompatActivity {
                     Map<String, Object> objectMap = vKeyNode.getValue(typeIndicator);
                     ObjectMapper objectMapper = new ObjectMapper();
                     VendorPackage vPackages = new VendorPackage();
-                    vPackages.setPackageName(objectMap.get("PackageName").toString());
-                    vPackages.setPackageCost(objectMap.get("PackageCost").toString());
+                    vPackages.setPackageName(Objects.requireNonNull(objectMap.get("PackageName")).toString());
+                    vPackages.setPackageCost(Objects.requireNonNull(objectMap.get("PackageCost")).toString());
                     vPackages.setVendorID(objectMap.get("VendorID").toString());
                     vPackages.setPackageMenu(objectMapper.convertValue(objectMap.get("PackageMenu"), Map.class));
                     vendorPackages.add(vPackages);
