@@ -16,6 +16,13 @@
     <string name="package_menu">0 xxxxx + 0 xxxxx + 0 xxxxx + xxxxx</string>
     <string name="hello">Hello,</string>
     <string name="logout">Logout</string>
+    <string name="menu_monday">Mon : </string>
+    <string name="menu_tuesday">Tue : </string>
+    <string name="menu_wednesday">Wed : </string>
+    <string name="menu_thursday">Thu : </string>
+    <string name="menu_friday">Fri : </string>
+    <string name="menu_saturday">Sat : </string>
+    <string name="menu_sunday">Sun : </string>
 
     <string-array name="locations">
         <item>Waterloo, ON</item>

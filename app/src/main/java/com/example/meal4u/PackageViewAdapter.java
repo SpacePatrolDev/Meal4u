@@ -26,7 +26,13 @@ public class PackageViewAdapter extends RecyclerView.Adapter<PackageViewAdapter.
         CardView cardView;
         TextView tvPackageName;
         TextView tvPackageCost;
-        ListView listView;
+        TextView tvMenuMonday;
+        TextView tvMenuTuesday;
+        TextView tvMenuWednesday;
+        TextView tvMenuThursday;
+        TextView tvMenuFriday;
+        TextView tvMenuSaturday;
+        TextView tvMenuSunday;
         Context context;
         List<VendorPackage> Packages;
         List<String> Keys;
@@ -37,7 +43,13 @@ public class PackageViewAdapter extends RecyclerView.Adapter<PackageViewAdapter.
             cardView = (CardView) itemView.findViewById(R.id.cv_packages);
             tvPackageName = (TextView) itemView.findViewById(R.id.cv_tv_packageName);
             tvPackageCost = (TextView) itemView.findViewById(R.id.cv_tv_packageCost);
-            listView = (ListView) itemView.findViewById(R.id.lv_package_days);
+            tvMenuMonday = (TextView) itemView.findViewById(R.id.pkg_tv_monday_menu);
+            tvMenuTuesday = (TextView) itemView.findViewById(R.id.pkg_tv_tuesday_menu);
+            tvMenuWednesday = (TextView) itemView.findViewById(R.id.pkg_tv_wednesday_menu);
+            tvMenuThursday = (TextView) itemView.findViewById(R.id.pkg_tv_thursday_menu);
+            tvMenuFriday = (TextView) itemView.findViewById(R.id.pkg_tv_friday_menu);
+            tvMenuSaturday = (TextView) itemView.findViewById(R.id.pkg_tv_saturday_menu);
+            tvMenuSunday = (TextView) itemView.findViewById(R.id.pkg_tv_sunday_menu);
             Packages = vendorPackages;
             Keys = keys;
             this.context = context;
@@ -48,18 +60,22 @@ public class PackageViewAdapter extends RecyclerView.Adapter<PackageViewAdapter.
         @SuppressLint("SetTextI18n")
         public void bind(VendorPackage vendorPackage, String key){
             tvPackageName.setText(vendorPackage.getPackageName());
-            tvPackageCost.setText(vendorPackage.getPackageCost());
-            Map menu = vendorPackage.getPackageMenu();
-            ListAdapter listAdapter = new ListAdapter(menu);
-            listView.setAdapter(listAdapter);
+            tvPackageCost.setText(Integer.toString(vendorPackage.getPackageCost()));
+            tvMenuMonday.setText(vendorPackage.getMonday());
+            tvMenuTuesday.setText(vendorPackage.getTuesday());
+            tvMenuWednesday.setText(vendorPackage.getWednesday());
+            tvMenuThursday.setText(vendorPackage.getThursday());
+            tvMenuFriday.setText(vendorPackage.getFriday());
+            tvMenuSaturday.setText(vendorPackage.getSaturday());
+            tvMenuSunday.setText(vendorPackage.getSunday());
             this.key = key;
         }
 
         @Override
         public void onClick(View view) {
-//            Intent intent = new Intent(context, OrderDetails.class);
-//            intent.putExtra("Package_Key", key);
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, OrderDetails.class);
+            intent.putExtra("Package_Key", key);
+            context.startActivity(intent);
         }
     }
 

@@ -91,14 +91,7 @@ public class VendorDetails extends AppCompatActivity {
                 for (DataSnapshot vKeyNode : dataSnapshot.getChildren())
                 {
                     packageKeys.add(vKeyNode.getKey());
-                    GenericTypeIndicator<HashMap<String,Object>> typeIndicator = new GenericTypeIndicator<HashMap<String, Object>>() {};
-                    Map<String, Object> objectMap = vKeyNode.getValue(typeIndicator);
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    VendorPackage vPackages = new VendorPackage();
-                    vPackages.setPackageName(Objects.requireNonNull(objectMap.get("PackageName")).toString());
-                    vPackages.setPackageCost(Objects.requireNonNull(objectMap.get("PackageCost")).toString());
-                    vPackages.setVendorID(objectMap.get("VendorID").toString());
-                    vPackages.setPackageMenu(objectMapper.convertValue(objectMap.get("PackageMenu"), Map.class));
+                    VendorPackage vPackages = vKeyNode.getValue(VendorPackage.class);
                     vendorPackages.add(vPackages);
                 }
                 adapter = new PackageViewAdapter(vendorPackages, packageKeys, context);
