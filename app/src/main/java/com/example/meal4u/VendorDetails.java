@@ -33,6 +33,8 @@ public class VendorDetails extends AppCompatActivity {
     private TextView textView_vn;
     private TextView textView_vr;
     private TextView textView_vt;
+    private String VendorKey;
+    private String CustomerKey;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -48,6 +50,8 @@ public class VendorDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_details);
         context = this;
+        VendorKey = getIntent().getStringExtra("Vendor_Key");
+        CustomerKey = getIntent().getStringExtra("Customer_Key");
         imageView = (ImageView) findViewById(R.id.iv_vendorDetails);
         textView_vn = (TextView) findViewById(R.id.tv_vn_vendorDetails);
         textView_vr = (TextView) findViewById(R.id.tv_vr_vendorDetails);
@@ -60,7 +64,6 @@ public class VendorDetails extends AppCompatActivity {
 
     private void getVendorPackage() {
 
-        final String VendorKey = getIntent().getStringExtra("Vendor_Key");
         Firebase vendorChildRef = dbRootRef.child("Vendor").child(VendorKey);
 
         vendorChildRef.addValueEventListener(new ValueEventListener() {
@@ -94,7 +97,7 @@ public class VendorDetails extends AppCompatActivity {
                     VendorPackage vPackages = vKeyNode.getValue(VendorPackage.class);
                     vendorPackages.add(vPackages);
                 }
-                adapter = new PackageViewAdapter(vendorPackages, packageKeys, context);
+                adapter = new PackageViewAdapter(vendorPackages, packageKeys, context, VendorKey, CustomerKey);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             }

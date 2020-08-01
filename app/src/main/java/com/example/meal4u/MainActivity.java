@@ -19,6 +19,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -26,7 +31,14 @@ import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNav;
+    private BottomNavigationView bottomNav;
+    private Firebase dbRootRef;
+    private String customerEmail;
+    private String customerID;
+
+    public MainActivity() {
+        dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNav = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
+        customerEmail = getIntent().getStringExtra("Customer_Email");
+        getCustomerID();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new DashboardFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new DashboardFragment(customerID)).commit();
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -44,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()) {
                     case R.id.nb_dashboard:
-                        currentFragment = new DashboardFragment();
+                        currentFragment = new DashboardFragment(customerID);
                         break;
                     case R.id.nb_orders:
                         currentFragment = new OrdersFragment();
@@ -57,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, currentFragment)
                         .commit();
-
                 return true;
             }
         });
@@ -69,6 +82,25 @@ public class MainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
 
+    public void getCustomerID(){
+        Firebase customerRef = dbRootRef.child("Customer");
+        Query customerQ = customerRef.orderByChild("EmailId").equalTo(customerEmail);
+
+        customerQ.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot cKeyNode: dataSnapshot.getChildren())
+                {
+                    customerID = cKeyNode.getKey();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 }

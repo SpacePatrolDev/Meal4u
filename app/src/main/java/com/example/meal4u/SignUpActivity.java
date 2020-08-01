@@ -146,7 +146,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
 
-                        Customer customer = new Customer();
+                        customer = new Customer();
                         customer.setFname(firstName);
                         customer.setLname(lastName);
                         customer.setAddress(address);

@@ -35,6 +35,7 @@ public class DashboardFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private Firebase dbRootRef;
     private Context context;
+    private String customerID;
     private RecyclerView.LayoutManager layoutManager;
 
     Toolbar toolbar;
@@ -75,8 +76,9 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-    public DashboardFragment(){
+    public DashboardFragment(String customerID){
         dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
+        this.customerID = customerID;
     }
 
     public void getVendors(String currentLocation) {
@@ -95,7 +97,7 @@ public class DashboardFragment extends Fragment {
                     Vendor vendor = vKeyNode.getValue(Vendor.class);
                     vendors.add(vendor);
                 }
-                adapter = new VendorViewAdapter(vendors, vendorKeys, context);
+                adapter = new VendorViewAdapter(vendors, vendorKeys, customerID, context);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             }

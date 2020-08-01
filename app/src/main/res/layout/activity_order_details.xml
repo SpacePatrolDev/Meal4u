@@ -1,9 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderDetails">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_od_vendorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vendor_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:gravity="center"
+            android:padding="15dp"/>
+
+        <View
+            android:id="@+id/div_od_view1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000"
+            android:layout_marginHorizontal="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_od_packageName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/package_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#000"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_od_paymentPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Payment Plan :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="25dp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_paymentPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp">
+
+            <RadioButton
+                android:id="@+id/rb_weekly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weekly"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <RadioButton
+                android:id="@+id/rb_biweekly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bi-Weekly"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <RadioButton
+                android:id="@+id/rb_monthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_od_paymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Payment Method :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="25dp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_paymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp">
+
+            <RadioButton
+                android:id="@+id/rb_gpay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google Play"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <RadioButton
+                android:id="@+id/rb_Credit_Debit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Credit/Debit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <RadioButton
+                android:id="@+id/rb_Interac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Interac"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="25dp"
+                android:text="Start Date : "/>
+
+            <EditText
+                android:id="@+id/et_od_startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Select Start Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:focusable="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="25dp"
+                android:text="End Date   : "/>
+
+            <EditText
+                android:id="@+id/et_od_endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Select End Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:focusable="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/btn_place_order"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

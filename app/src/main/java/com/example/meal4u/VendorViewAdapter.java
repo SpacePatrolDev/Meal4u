@@ -27,9 +27,10 @@ public class VendorViewAdapter extends RecyclerView.Adapter<VendorViewAdapter.rV
         Context context;
         List<Vendor> vendorData;
         List<String> vendorKeys;
-        String key;
+        String vendorKey;
+        String customerKey;
 
-        public rViewHolder(View v, Context c, List<Vendor> al, List<String> k){
+        public rViewHolder(View v, Context c, List<Vendor> al, List<String> k, String ck){
             super(v);
             cv = (CardView) v.findViewById(R.id.rv_dashboard);
             tvVendorName = (TextView) v.findViewById(R.id.cv_tv_dashboard_vn);
@@ -38,14 +39,15 @@ public class VendorViewAdapter extends RecyclerView.Adapter<VendorViewAdapter.rV
             tvVendorWD = (TextView) v.findViewById(R.id.cv_tv_dashboard_wd);
             tvVendorPR = (TextView) v.findViewById(R.id.cv_tv_dashboard_pr);
             ivVendorDP = (ImageView) v.findViewById(R.id.cv_iv_dashboard_vi);
-            this.context = c;
-            this.vendorData = al;
-            this.vendorKeys = k;
+            context = c;
+            vendorData = al;
+            vendorKeys = k;
+            customerKey = ck;
 
             v.setOnClickListener(this);
         }
 
-        public void bind(Vendor vendor, String key){
+        public void bind(Vendor vendor, String vKey){
             tvVendorName.setText(vendor.getVendorName());
             tvVendorRating.setText(vendor.getVendorRating());
             tvVendorTitle.setText(vendor.getVendorTitle());
@@ -53,24 +55,27 @@ public class VendorViewAdapter extends RecyclerView.Adapter<VendorViewAdapter.rV
             tvVendorPR.setText(vendor.getVendorPR());
             ivVendorDP.setImageResource(context.getResources().getIdentifier("drawable/"+vendor.getVendorDP(), null, context.getPackageName()));
 
-            this.key = key;
+            this.vendorKey = vKey;
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, VendorDetails.class);
-            intent.putExtra("Vendor_Key", key);
+            intent.putExtra("Vendor_Key", vendorKey);
+            intent.putExtra("Customer_Key", customerKey);
             context.startActivity(intent);
         }
     }
 
     private List<Vendor> vendorData;
     private List<String> vendorKey;
+    private String customerID;
     private Context context;
 
-    public VendorViewAdapter(List<Vendor> vendors, List<String> keys, Context context){
+    public VendorViewAdapter(List<Vendor> vendors, List<String> keys, String customerID, Context context){
         this.vendorData = vendors;
         this.vendorKey = keys;
+        this.customerID = customerID;
         this.context = context;
     }
 
@@ -79,7 +84,7 @@ public class VendorViewAdapter extends RecyclerView.Adapter<VendorViewAdapter.rV
     public rViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_cards, parent,false);
-        return new rViewHolder(view, context, vendorData, vendorKey);
+        return new rViewHolder(view, context, vendorData, vendorKey, customerID);
     }
 
     @Override
