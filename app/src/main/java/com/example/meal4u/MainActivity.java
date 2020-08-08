@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         currentFragment = new OrdersFragment();
                         break;
                     case R.id.nb_profile:
-                        currentFragment = new ProfileFragment();
+                        currentFragment = new ProfileFragment(customerID);
                         break;
                 }
 

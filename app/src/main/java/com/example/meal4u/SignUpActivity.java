@@ -28,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private Firebase firebase;
-   private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
     private Customer customer;
 
@@ -166,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(SignUpActivity.this,"Oppsss!!! UNSuccessfull",  Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this,"Opps6s!!! UNSuccessfull",  Toast.LENGTH_SHORT).show();
                         }
 
                        progressDialog.dismiss();
