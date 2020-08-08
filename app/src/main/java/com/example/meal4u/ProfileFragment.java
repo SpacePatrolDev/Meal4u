@@ -93,7 +93,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                System.out.println("Check" + snapshot.getKey() + "Value" +snapshot.getValue());
                 String fname = snapshot.child("Customer").getValue(String.class);
                 String lname = snapshot.child("Customer").getValue(String.class);
                 String emailId = snapshot.child("Customer").getValue(String.class);
