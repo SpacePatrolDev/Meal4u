@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private Firebase dbRootRef;
     private String customerEmail;
     private String customerID;
+    private Fragment currentFragment;
+    private Bundle bundle;
 
     public MainActivity() {
         dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
@@ -47,18 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = (BottomNavigationView) findViewById(R.id.bottom_nav_bar);
         customerEmail = getIntent().getStringExtra("Customer_Email");
-        getCustomerID();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new DashboardFragment(customerID)).commit();
+        bundle = new Bundle();
+        bundle.putString("CustomerEmail", customerEmail);
+        currentFragment = new DashboardFragment();
+        currentFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, currentFragment).commit();
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment currentFragment = null;
 
                 switch (menuItem.getItemId()) {
                     case R.id.nb_dashboard:
-                        currentFragment = new DashboardFragment(customerID);
+                        currentFragment = new DashboardFragment();
+                        currentFragment.setArguments(bundle);
                         break;
                     case R.id.nb_orders:
                         currentFragment = new OrdersFragment();
@@ -82,25 +87,5 @@ public class MainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-
-    public void getCustomerID(){
-        Firebase customerRef = dbRootRef.child("Customer");
-        Query customerQ = customerRef.orderByChild("EmailId").equalTo(customerEmail);
-
-        customerQ.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot cKeyNode: dataSnapshot.getChildren())
-                {
-                    customerID = cKeyNode.getKey();
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
     }
 }

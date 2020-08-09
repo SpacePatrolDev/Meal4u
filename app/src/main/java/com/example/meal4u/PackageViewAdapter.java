@@ -51,7 +51,6 @@ public class PackageViewAdapter extends RecyclerView.Adapter<PackageViewAdapter.
             this.context = context;
             this.vendorKey = vendorKey;
             this.customerKey = customerKey;
-
             itemView.setOnClickListener(this);
         }
 

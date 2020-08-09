@@ -35,6 +35,7 @@ public class DashboardFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private Firebase dbRootRef;
     private Context context;
+    private String customerEmail;
     private String customerID;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -45,6 +46,8 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        if(getArguments() != null)
+            customerEmail = getArguments().getString("CustomerEmail");
         context = this.getActivity();
         toolbar = (Toolbar) view.findViewById(R.id.tb_dashboard);
         spinner = (Spinner) view.findViewById(R.id.sp_location);
@@ -68,6 +71,24 @@ public class DashboardFragment extends Fragment {
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
+        Firebase customerRef = dbRootRef.child("Customer");
+        Query customerQ = customerRef.orderByChild("EmailId").equalTo(customerEmail);
+
+        customerQ.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot cKeyNode: dataSnapshot.getChildren())
+                {
+                    customerID = cKeyNode.getKey();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_dashboard);
         recyclerView.hasFixedSize();
 
@@ -76,9 +97,8 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-    public DashboardFragment(String customerID){
+    public DashboardFragment(){
         dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
-        this.customerID = customerID;
     }
 
     public void getVendors(String currentLocation) {
