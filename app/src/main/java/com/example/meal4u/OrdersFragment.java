@@ -1,76 +1,125 @@
 package com.example.meal4u;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class OrdersFragment extends Fragment{
 
-private RecyclerView recyclerView;
-private RecyclerView.LayoutManager layoutManager;
-private Firebase dbRootRef;
+    private List<Order> orders = new ArrayList<>();
+    private List<String> orderKeys;
+    private List<String> vendorNames;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private Firebase dbRootRef;
+    private Context context;
+    private String customerEmail;
+    private String customerID;
+    private String vendorName;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+        if(getArguments() != null)
+            customerEmail = getArguments().getString("CustomerEmail");
+        context = this.getActivity();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_packages);
+        recyclerView = (RecyclerView) view.findViewById(R.id.order_page);
         recyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(getActivity());
-        getCustomer();
 
+        Firebase customerRef = dbRootRef.child("Customer");
+        Query customerQ = customerRef.orderByChild("EmailId").equalTo(customerEmail);
+
+        customerQ.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot cKeyNode: dataSnapshot.getChildren())
+                {
+                    customerID = cKeyNode.getKey();
+                    getOrders();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
         return view;
     }
 
-
-
-
-
-    public OrdersFragment(){
+    public OrdersFragment() {
         dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
     }
 
-    private void getCustomer() {
+    public void getOrders(){
+        Firebase orderRef = dbRootRef.child("Order");
+        Query customerOrder = orderRef.orderByChild("CustomerID").equalTo(customerID);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+        customerOrder.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null)
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                orders.clear();
+                orderKeys = new ArrayList<>();
+                vendorNames = new ArrayList<>();
+
+                for(DataSnapshot vKeyNode : dataSnapshot.getChildren())
                 {
-                    String userId = firebaseUser.getProviderId();
-                    String CustId = firebaseUser.getUid();
+                    orderKeys.add(vKeyNode.getKey());
+                    Order order = vKeyNode.getValue(Order.class);
+                    orders.add(order);
+                    vendorNames.add(getVendorName(order));
                 }
+                adapter = new OrderViewAdapter(orders, orderKeys, vendorNames, context);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adapter);
             }
-        };
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
-    private Intent getIntent() {
-        return null;
-    }
+    public String getVendorName(Order order){
+        String vendorId = order.getVendorID();
+        Firebase vendorRef = dbRootRef.child("Vendor").child(vendorId).child("VendorName");
+        vendorRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                vendorName = dataSnapshot.getValue(String.class);
+            }
 
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        return vendorName;
+    }
 }

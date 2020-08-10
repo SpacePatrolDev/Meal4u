@@ -7,85 +7,111 @@
     tools:context=".SignUpActivity"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Free Account"
+        android:text="@string/create_free_account"
         android:padding="10dp"
-        android:layout_margin="20dp"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:gravity="center" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-
-    <EditText
-        android:id="@+id/firstName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your First Name"
-        android:inputType="text"
-        android:padding="10dp"
-        android:layout_margin="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:orientation="horizontal"
+        android:weightSum="10">
 
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Your Last Name"
-        android:inputType="text"
-        android:padding="10dp"
-        android:layout_margin="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:inputType="text"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:inputType="text"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/mobileNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="+1 (XXX)XXX-XXXX"
-        android:padding="10dp"
+        android:hint="Mobile: (XXX) XXX-XXXX"
         android:inputType="phone"
-        android:layout_margin="20dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your Complete Address With PIN Code"
+        android:hint="Street Name"
         android:inputType="text"
-        android:padding="10dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_City"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <Spinner
+            android:id="@+id/sp_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <EditText
+            android:id="@+id/pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pin Code"
+            android:inputType="text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/signup_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your Email Address"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
     <EditText
         android:id="@+id/signup_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword"
-        android:padding="10dp"
-        android:layout_margin="20dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <EditText
@@ -94,8 +120,7 @@
         android:layout_height="wrap_content"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        android:padding="10dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
     <Button
@@ -110,6 +135,5 @@
         android:textAllCaps="false"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"/>
-    </ScrollView>
 
 </LinearLayout>

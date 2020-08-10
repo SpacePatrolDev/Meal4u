@@ -32,15 +32,9 @@ import java.util.zip.Inflater;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNav;
-    private Firebase dbRootRef;
     private String customerEmail;
-    private String customerID;
     private Fragment currentFragment;
     private Bundle bundle;
-
-    public MainActivity() {
-        dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nb_orders:
                         currentFragment = new OrdersFragment();
+                        currentFragment.setArguments(bundle);
                         break;
                     case R.id.nb_profile:
-                        currentFragment = new ProfileFragment(customerID);
+                        currentFragment = new ProfileFragment();
+                        currentFragment.setArguments(bundle);
                         break;
                 }
 

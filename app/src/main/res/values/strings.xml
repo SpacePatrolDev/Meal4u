@@ -14,7 +14,7 @@
     <string name="package_cost">00</string>
     <string name="package_weekday">Weekday</string>
     <string name="package_menu">0 xxxxx + 0 xxxxx + 0 xxxxx + xxxxx</string>
-    <string name="hello">Hello,</string>
+    <string name="hello">Hello, Foodie!</string>
     <string name="logout">Logout</string>
     <string name="menu_monday">Mon : </string>
     <string name="menu_tuesday">Tue : </string>
@@ -25,6 +25,15 @@
     <string name="menu_sunday">Sun : </string>
     <string name="btn_place_order">Place Order</string>
     <string name="package_cost_label">Cost: $</string>
+    <string name="user_first_name">firstName</string>
+    <string name="user_last_name">lastName</string>
+    <string name="user_email">user@email.com</string>
+    <string name="user_mobile">0000000000</string>
+    <string name="user_full_address">123 Name Street, Waterloo ON X0X 0X0</string>
+    <string name="profile_description">profile_description</string>
+    <string name="create_free_account">Create Free Account</string>
+    <string name="tax_delivery"><![CDATA[Tax & Delivery]]></string>
+    <string name="package_cost_text">Package Cost</string>
 
     <string-array name="locations">
         <item>Waterloo, ON</item>

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer {
 
-    public String Address;
+    public String StName;
+    public String CityName;
+    public String PinCode;
     public String EmailId;
     public String Fname;
     public String Lname;
@@ -13,20 +15,38 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String address, String emailId, String fname, String lname, String mobile) {
-        Address = address;
+    public Customer(String stName, String cityName, String pinCode, String emailId, String fname, String lname, String mobile) {
+        StName = stName;
+        CityName = cityName;
+        PinCode = pinCode;
         EmailId = emailId;
         Fname = fname;
         Lname = lname;
         Mobile = mobile;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getCityName() {
+        return CityName;
     }
-    @JsonProperty("Address")
-    public void setAddress(String address) {
-        Address = address;
+    @JsonProperty("CityName")
+    public void setCityName(String cityName) {
+        CityName = cityName;
+    }
+
+    public String getPinCode() {
+        return PinCode;
+    }
+    @JsonProperty("PinCode")
+    public void setPinCode(String pinCode) {
+        PinCode = pinCode;
+    }
+
+    public String getStName() {
+        return StName;
+    }
+    @JsonProperty("StName")
+    public void setStName(String stName) {
+        StName = stName;
     }
 
     public String getEmailId() {
