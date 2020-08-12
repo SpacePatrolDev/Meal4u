@@ -4,24 +4,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Order {
     public String CustomerID;
-    public String PackageID;
-    public String VendorID;
+    public String PackageName;
+    public String VendorName;
     public String StartDate;
     public String EndDate;
     public String PayMethod;
     public String PayPlan;
+    public String PackageCost;
 
     public Order() {
     }
 
-    public Order(String customerID, String packageID, String vendorID, String startDate, String endDate, String payMethod, String payPlan) {
+    public Order(String customerID, String packageName, String vendorName, String startDate, String endDate, String payMethod, String payPlan, String packageCost) {
         CustomerID = customerID;
-        PackageID = packageID;
-        VendorID = vendorID;
+        PackageName = packageName;
+        VendorName = vendorName;
         StartDate = startDate;
         EndDate = endDate;
         PayMethod = payMethod;
         PayPlan = payPlan;
+        PackageCost = packageCost;
+    }
+
+    public String getPackageCost() {
+        return PackageCost;
+    }
+
+    @JsonProperty("PackageCost")
+    public void setPackageCost(String packageCost) {
+        PackageCost = packageCost;
     }
 
     public String getCustomerID() {
@@ -33,22 +44,22 @@ public class Order {
         CustomerID = customerID;
     }
 
-    public String getPackageID() {
-        return PackageID;
+    public String getPackageName() {
+        return PackageName;
     }
 
     @JsonProperty("PackageID")
-    public void setPackageID(String packageID) {
-        PackageID = packageID;
+    public void setPackageName(String packageName) {
+        PackageName = packageName;
     }
 
-    public String getVendorID() {
-        return VendorID;
+    public String getVendorName() {
+        return VendorName;
     }
 
     @JsonProperty("VendorID")
-    public void setVendorID(String vendorID) {
-        VendorID = vendorID;
+    public void setVendorName(String vendorName) {
+        VendorName = vendorName;
     }
 
     public String getStartDate() {

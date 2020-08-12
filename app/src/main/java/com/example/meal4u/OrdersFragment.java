@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -29,7 +30,6 @@ public class OrdersFragment extends Fragment{
 
     private List<Order> orders = new ArrayList<>();
     private List<String> orderKeys;
-    private List<String> vendorNames;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -37,7 +37,6 @@ public class OrdersFragment extends Fragment{
     private Context context;
     private String customerEmail;
     private String customerID;
-    private String vendorName;
 
     @Nullable
     @Override
@@ -85,16 +84,14 @@ public class OrdersFragment extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 orders.clear();
                 orderKeys = new ArrayList<>();
-                vendorNames = new ArrayList<>();
 
                 for(DataSnapshot vKeyNode : dataSnapshot.getChildren())
                 {
                     orderKeys.add(vKeyNode.getKey());
                     Order order = vKeyNode.getValue(Order.class);
                     orders.add(order);
-                    vendorNames.add(getVendorName(order));
                 }
-                adapter = new OrderViewAdapter(orders, orderKeys, vendorNames, context);
+                adapter = new OrderViewAdapter(orders, orderKeys, context);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             }
@@ -104,22 +101,5 @@ public class OrdersFragment extends Fragment{
 
             }
         });
-    }
-
-    public String getVendorName(Order order){
-        String vendorId = order.getVendorID();
-        Firebase vendorRef = dbRootRef.child("Vendor").child(vendorId).child("VendorName");
-        vendorRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                vendorName = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-        return vendorName;
     }
 }

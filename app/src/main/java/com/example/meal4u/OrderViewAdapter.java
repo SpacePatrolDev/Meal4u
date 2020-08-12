@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.oViewHolder> {
 
@@ -49,16 +50,19 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.oVie
             v.setOnClickListener(this);
         }
 
-        public void bind(Order order, String oKey, String vName){
-            tvVendorName.setText(vName);
-            tvPackageName.setText("");
+        public void bind(Order order, String oKey){
+            tvVendorName.setText(order.getVendorName());
+            tvPackageName.setText(order.getPackageName());
             tvStartDate.setText(order.getStartDate());
             tvEndDate.setText(order.getEndDate());
             tvPayPlan.setText(order.getPayPlan());
             tvPayMethod.setText(order.getPayMethod());
-            tvPackageCost.setText("");
-            tvTaxPrice.setText("");
-            tvTotalCost.setText("");
+            double pCost = Integer.parseInt(order.getPackageCost());
+            double tax = pCost *0.05;
+            double total = pCost + tax;
+            tvPackageCost.setText("$"+String.format(Locale.CANADA, "%.2f", pCost));
+            tvTaxPrice.setText("$"+tax);
+            tvTotalCost.setText("$"+total);
             orderKey = oKey;
         }
 
@@ -70,13 +74,11 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.oVie
 
     private List<Order> orders;
     private List<String> orderKeys;
-    private List<String> vendorNames;
     private Context context;
 
-    public OrderViewAdapter(List<Order> orders, List<String> orderKeys, List<String> vendorNames, Context context) {
+    public OrderViewAdapter(List<Order> orders, List<String> orderKeys, Context context) {
         this.orders = orders;
         this.orderKeys = orderKeys;
-        this.vendorNames = vendorNames;
         this.context = context;
     }
 
@@ -90,7 +92,7 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewAdapter.oVie
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewAdapter.oViewHolder holder, int position) {
-        holder.bind(orders.get(position), orderKeys.get(position), vendorNames.get(position));
+        holder.bind(orders.get(position), orderKeys.get(position));
     }
 
     @Override

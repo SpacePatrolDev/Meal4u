@@ -28,8 +28,11 @@ import java.util.Map;
 public class OrderDetails extends AppCompatActivity {
 
     private String VendorKey;
+    private String VendorName;
     private String CustomerKey;
     private String PackageKey;
+    private String PackageName;
+    private String PackageCost;
     private Firebase dbRootRef;
     private EditText edStartDate;
     private EditText edEndDate;
@@ -115,8 +118,9 @@ public class OrderDetails extends AppCompatActivity {
 
                 Order order = new Order();
                 order.setCustomerID(CustomerKey);
-                order.setVendorID(VendorKey);
-                order.setPackageID(PackageKey);
+                order.setVendorName(VendorName);
+                order.setPackageName(PackageName);
+                order.setPackageCost(PackageCost);
                 order.setPayPlan(rbPayPlan.getText().toString());
                 order.setPayMethod(rbPayMethod.getText().toString());
                 order.setStartDate(edStartDate.getText().toString());
@@ -126,7 +130,7 @@ public class OrderDetails extends AppCompatActivity {
                 dbReference.setValue(order);
 
                 Toast.makeText(OrderDetails.this,"Order Placed!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(OrderDetails.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(OrderDetails.this, LoginActivity.class));
 
                 progressDialog.dismiss();
             }
@@ -140,7 +144,8 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> mapVendor = dataSnapshot.getValue(Map.class);
-                tvVendorName.setText(mapVendor.get("VendorName"));
+                VendorName = mapVendor.get("VendorName");
+                tvVendorName.setText(VendorName);
             }
 
             @Override
@@ -154,7 +159,9 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> mapPackage = dataSnapshot.getValue(Map.class);
-                tvPackageName.setText(mapPackage.get("PackageName"));
+                PackageName = mapPackage.get("PackageName");
+                PackageCost = mapPackage.get("PackageCost");
+                tvPackageName.setText(PackageName);
             }
 
             @Override
