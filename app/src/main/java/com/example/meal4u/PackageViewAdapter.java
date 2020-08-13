@@ -54,10 +54,9 @@ public class PackageViewAdapter extends RecyclerView.Adapter<PackageViewAdapter.
             itemView.setOnClickListener(this);
         }
 
-        @SuppressLint("SetTextI18n")
         public void bind(VendorPackage vendorPackage, String packageKey){
             tvPackageName.setText(vendorPackage.getPackageName());
-            tvPackageCost.setText(Integer.toString(vendorPackage.getPackageCost()));
+            tvPackageCost.setText(vendorPackage.getPackageCost());
             tvMenuMonday.setText(vendorPackage.getMonday());
             tvMenuTuesday.setText(vendorPackage.getTuesday());
             tvMenuWednesday.setText(vendorPackage.getWednesday());

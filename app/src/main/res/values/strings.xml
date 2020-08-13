@@ -36,9 +36,9 @@
     <string name="package_cost_text">Package Cost</string>
 
     <string-array name="locations">
-        <item>Waterloo, ON</item>
-        <item>Kitchener, ON</item>
-        <item>Cambridge, ON</item>
-        <item>Guelph, ON</item>
+        <item>Waterloo ON</item>
+        <item>Kitchener ON</item>
+        <item>Cambridge ON</item>
+        <item>Guelph ON</item>
     </string-array>
 </resources>

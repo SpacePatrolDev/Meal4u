@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmailLogin;
@@ -45,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-
             }
         });
 
@@ -55,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (firebaseAuth.getCurrentUser() != null) {
                     Intent intent = new Intent(LoginActivity.this,  MainActivity.class);
                     intent.putExtra("Customer_Email", firebaseAuth.getCurrentUser().getEmail());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
             }

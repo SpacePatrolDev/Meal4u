@@ -3,9 +3,11 @@ package com.example.meal4u;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +25,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OrdersFragment extends Fragment{
 
-    private List<Order> orders = new ArrayList<>();
-    private List<String> orderKeys;
+    private List<CustomerOrder> customerOrders = new ArrayList<>();
+    private List<String> COKeys;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -37,6 +40,7 @@ public class OrdersFragment extends Fragment{
     private Context context;
     private String customerEmail;
     private String customerID;
+    private int a=0;
 
     @Nullable
     @Override
@@ -59,7 +63,7 @@ public class OrdersFragment extends Fragment{
                 for(DataSnapshot cKeyNode: dataSnapshot.getChildren())
                 {
                     customerID = cKeyNode.getKey();
-                    getOrders();
+                    getCustomerOrders();
                 }
             }
 
@@ -75,23 +79,21 @@ public class OrdersFragment extends Fragment{
         dbRootRef = new Firebase("https://meal4u-69675.firebaseio.com/");
     }
 
-    public void getOrders(){
-        Firebase orderRef = dbRootRef.child("Order");
-        Query customerOrder = orderRef.orderByChild("CustomerID").equalTo(customerID);
+    public void getCustomerOrders(){
+        Firebase custOrderRef = dbRootRef.child("CustomerOrder");
+        Query customerOrder = custOrderRef.orderByChild("CustomerID").equalTo(customerID);
 
         customerOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                orders.clear();
-                orderKeys = new ArrayList<>();
-
-                for(DataSnapshot vKeyNode : dataSnapshot.getChildren())
+                COKeys = new ArrayList<>();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
-                    orderKeys.add(vKeyNode.getKey());
-                    Order order = vKeyNode.getValue(Order.class);
-                    orders.add(order);
+                    COKeys.add(snapshot.getKey());
+                    CustomerOrder co = snapshot.getValue(CustomerOrder.class);
+                    customerOrders.add(co);
                 }
-                adapter = new OrderViewAdapter(orders, orderKeys, context);
+                adapter = new OrderViewAdapter(COKeys, customerOrders, context);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);
             }

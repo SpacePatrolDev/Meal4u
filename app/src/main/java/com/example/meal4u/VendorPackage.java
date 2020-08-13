@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class VendorPackage {
     public String PackageName;
-    public int PackageCost;
+    public String PackageCost;
     public String VendorID;
     public String Monday;
     public String Tuesday;
@@ -14,7 +14,7 @@ public class VendorPackage {
     public String Saturday;
     public String Sunday;
 
-    public VendorPackage(String packageName, int packageCost, String vendorID, String monday, String tuesday,
+    public VendorPackage(String packageName, String packageCost, String vendorID, String monday, String tuesday,
                          String wednesday, String thursday, String friday, String saturday, String sunday) {
         PackageName = packageName;
         PackageCost = packageCost;
@@ -49,12 +49,12 @@ public class VendorPackage {
         PackageName = packageName;
     }
 
-    public int getPackageCost() {
+    public String getPackageCost() {
         return PackageCost;
     }
 
     @JsonProperty("PackageCost")
-    public void setPackageCost(int packageCost) {
+    public void setPackageCost(String packageCost) {
         PackageCost = packageCost;
     }
 

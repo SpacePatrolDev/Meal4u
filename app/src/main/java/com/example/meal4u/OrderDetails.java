@@ -30,6 +30,9 @@ public class OrderDetails extends AppCompatActivity {
     private String VendorKey;
     private String VendorName;
     private String CustomerKey;
+    private String CustomerName;
+    private String CustomerAdd1;
+    private String CustomerAdd2;
     private String PackageKey;
     private String PackageName;
     private String PackageCost;
@@ -116,18 +119,33 @@ public class OrderDetails extends AppCompatActivity {
                 rbPayPlan = (RadioButton) findViewById(rgPayPlan.getCheckedRadioButtonId());
                 rbPayMethod = (RadioButton) findViewById(rgPayMethod.getCheckedRadioButtonId());
 
+                progressDialog.setMessage("Placing Order");
+                progressDialog.show();
+
                 Order order = new Order();
-                order.setCustomerID(CustomerKey);
-                order.setVendorName(VendorName);
-                order.setPackageName(PackageName);
-                order.setPackageCost(PackageCost);
                 order.setPayPlan(rbPayPlan.getText().toString());
                 order.setPayMethod(rbPayMethod.getText().toString());
                 order.setStartDate(edStartDate.getText().toString());
                 order.setEndDate(edEndDate.getText().toString());
 
+                CustomerOrder customerOrder = new CustomerOrder();
+                customerOrder.setCustomerID(CustomerKey);
+                customerOrder.setCustomerName(CustomerName);
+                customerOrder.setCustomerAddress1(CustomerAdd1);
+                customerOrder.setCustomerAddress2(CustomerAdd2);
+                customerOrder.setVendorName(VendorName);
+                customerOrder.setPackageName(PackageName);
+                customerOrder.setPackageCost(PackageCost);
+                customerOrder.setPayPlan(rbPayPlan.getText().toString());
+                customerOrder.setPayMethod(rbPayMethod.getText().toString());
+                customerOrder.setStartDate(edStartDate.getText().toString());
+                customerOrder.setEndDate(edEndDate.getText().toString());
+
                 Firebase dbReference = dbRootRef.child("Order").push();
                 dbReference.setValue(order);
+
+                Firebase CustOrdRef = dbRootRef.child("CustomerOrder").push();
+                CustOrdRef.setValue(customerOrder);
 
                 Toast.makeText(OrderDetails.this,"Order Placed!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(OrderDetails.this, LoginActivity.class));
@@ -139,7 +157,6 @@ public class OrderDetails extends AppCompatActivity {
 
     public void getOrderDetails(){
         Firebase vendorChildRef = dbRootRef.child("Vendor").child(VendorKey);
-
         vendorChildRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -154,7 +171,6 @@ public class OrderDetails extends AppCompatActivity {
         });
 
         Firebase packageChildRef = dbRootRef.child("Package").child(PackageKey);
-
         packageChildRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -162,6 +178,26 @@ public class OrderDetails extends AppCompatActivity {
                 PackageName = mapPackage.get("PackageName");
                 PackageCost = mapPackage.get("PackageCost");
                 tvPackageName.setText(PackageName);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        Firebase customerChildRef = dbRootRef.child("Customer").child(CustomerKey);
+        customerChildRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, String> mapPackage = dataSnapshot.getValue(Map.class);
+                String Fname = mapPackage.get("Fname");
+                String Lname = mapPackage.get("Lname");
+                CustomerName = Fname+" "+Lname;
+                CustomerAdd1 = mapPackage.get("StName");
+                String city = mapPackage.get("CityName");
+                String pincode = mapPackage.get("PinCode");
+                CustomerAdd2 = city+" "+pincode;
             }
 
             @Override
