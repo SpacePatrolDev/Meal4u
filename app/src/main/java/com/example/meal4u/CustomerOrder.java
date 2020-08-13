@@ -7,6 +7,8 @@ public class CustomerOrder {
     public String CustomerName;
     public String CustomerAddress1;
     public String CustomerAddress2;
+    public String CustomerMobile;
+    public String VendorID;
     public String VendorName;
     public String PackageName;
     public String PackageCost;
@@ -18,11 +20,15 @@ public class CustomerOrder {
     public CustomerOrder() {
     }
 
-    public CustomerOrder(String customerID, String customerName, String customerAddress1, String customerAddress2, String vendorName, String packageName, String packageCost, String startDate, String endDate, String payMethod, String payPlan) {
+    public CustomerOrder(String customerID, String customerName, String customerAddress1, String customerAddress2,
+                         String customerMobile, String vendorID, String vendorName, String packageName, String packageCost,
+                         String startDate, String endDate, String payMethod, String payPlan) {
         CustomerID = customerID;
         CustomerName = customerName;
         CustomerAddress1 = customerAddress1;
         CustomerAddress2 = customerAddress2;
+        CustomerMobile = customerMobile;
+        VendorID = vendorID;
         VendorName = vendorName;
         PackageName = packageName;
         PackageCost = packageCost;
@@ -119,4 +125,21 @@ public class CustomerOrder {
     public void setPayPlan(String payPlan) {
         PayPlan = payPlan;
     }
+
+    public String getCustomerMobile() {
+        return CustomerMobile;
+    }
+    @JsonProperty("CustomerMobile")
+    public void setCustomerMobile(String customerMobile) {
+        CustomerMobile = customerMobile;
+    }
+
+    public String getVendorID() {
+        return VendorID;
+    }
+    @JsonProperty("VendorID")
+    public void setVendorID(String vendorID) {
+        VendorID = vendorID;
+    }
 }
+

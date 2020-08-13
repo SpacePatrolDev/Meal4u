@@ -33,6 +33,7 @@ public class OrderDetails extends AppCompatActivity {
     private String CustomerName;
     private String CustomerAdd1;
     private String CustomerAdd2;
+    private String CustomerMobile;
     private String PackageKey;
     private String PackageName;
     private String PackageCost;
@@ -133,6 +134,8 @@ public class OrderDetails extends AppCompatActivity {
                 customerOrder.setCustomerName(CustomerName);
                 customerOrder.setCustomerAddress1(CustomerAdd1);
                 customerOrder.setCustomerAddress2(CustomerAdd2);
+                customerOrder.setCustomerMobile(CustomerMobile);
+                customerOrder.setVendorID(VendorKey);
                 customerOrder.setVendorName(VendorName);
                 customerOrder.setPackageName(PackageName);
                 customerOrder.setPackageCost(PackageCost);
@@ -198,6 +201,7 @@ public class OrderDetails extends AppCompatActivity {
                 String city = mapPackage.get("CityName");
                 String pincode = mapPackage.get("PinCode");
                 CustomerAdd2 = city+" "+pincode;
+                CustomerMobile = mapPackage.get("Mobile");
             }
 
             @Override
