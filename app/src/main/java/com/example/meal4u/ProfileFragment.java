@@ -87,8 +87,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
-
-
         return view;
     }
 
